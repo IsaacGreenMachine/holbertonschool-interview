@@ -18,6 +18,8 @@ def canUnlockAll(boxes):
 
     Return True if all boxes can be opened, else return False
     """
+
+    '''
     keys = [0]
     opened_boxes = 0
     while opened_boxes < len(boxes):
@@ -31,3 +33,23 @@ def canUnlockAll(boxes):
         if keys == []:
             return False
     return True
+    '''
+    keys = [0]
+    x = 0
+    while True:
+        # print(f"boxes: {boxes}")
+        # print(f"keys: {keys}")
+        for key in keys:
+            if boxes[key] != [-1]:
+                # print(f"opening box {key} : {boxes[key]}")
+                keys += boxes[key]
+                boxes[key] = [-1]
+            keys.remove(key)
+            # print(f"keys: {keys}")
+
+        if all(box == [-1] for box in boxes):
+            # print(boxes)
+            return True
+        if keys == []:
+            return False
+        x += 1
