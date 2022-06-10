@@ -53,9 +53,7 @@ def canUnlockAll(boxes):
         checked, keys = check_boxes(checked, keys, boxes)
 
         if len(keys) == 0:
-            break
-
-    return len(checked) == len(boxes)
+            return len(checked) == len(boxes)
 
 
 def check_boxes(checked, keys, boxes):
