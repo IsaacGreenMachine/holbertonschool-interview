@@ -34,22 +34,29 @@ def canUnlockAll(boxes):
             return False
     return True
     '''
-    keys = [0]
-    x = 0
+    for count, box in enumerate(boxes):
+        box.insert(0, count)
+        box.insert(1, "locked")
+    boxes[0][1] = "unlocked"
     while True:
-        # print(f"boxes: {boxes}")
-        # print(f"keys: {keys}")
-        for key in keys:
-            if boxes[key] != [-1]:
-                # print(f"opening box {key} : {boxes[key]}")
-                keys += boxes[key]
-                boxes[key] = [-1]
-            keys.remove(key)
-            # print(f"keys: {keys}")
-
-        if all(box == [-1] for box in boxes):
-            # print(boxes)
-            return True
+        keys = collectKeys(boxes)
         if keys == []:
             return False
-        x += 1
+        unlockBoxes(boxes, keys)
+        if all("empty" in box or "unlocked" in box for box in boxes):
+            return True
+
+
+def collectKeys(boxes):
+    keys = []
+    for box in boxes:
+        if box[1] == "unlocked":
+            keys += box[2:]
+            box[1] = "empty"
+    return keys
+
+
+def unlockBoxes(boxes, keys):
+    for key in keys:
+        if boxes[key][1] == "locked":
+            boxes[key][1] = "unlocked"
