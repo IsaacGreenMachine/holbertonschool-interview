@@ -25,18 +25,24 @@ while (mover->next != NULL)
 if (mover->n == newList->n)
 {
 if (checkPalindrome(mover, newList))
+{
+free_listint(newList);
 return (1);
+}
 }
 else if (mover->next->n == newList->n)
 {
 if (checkPalindrome(mover->next, newList))
+{
+free_listint(newList);
 return (1);
+}
 }
 
 newList = add_nodeint_start(&newList, mover->n);
 mover = mover->next;
 }
-
+free_listint(newList);
 return (0);
 
 }
