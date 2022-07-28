@@ -9,6 +9,11 @@ int is_palindrome(listint_t **head)
 listint_t *newList;
 listint_t *mover;
 mover = *head;
+
+if (mover == NULL || mover->next == NULL)
+return (1);
+
+
 newList = NULL;
 newList = add_nodeint_start(&newList, mover->n);
 mover = mover->next;
