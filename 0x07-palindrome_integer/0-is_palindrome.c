@@ -17,12 +17,10 @@ original /= 10;
 
 while (n > 0)
 {
-printf("checking %lu and %lu\n", n / 10, reverse / 10);
 if (n / 10 != reverse / 10)
 return (0);
 n /= 10;
 reverse /= 10;
-printf
 }
 return (1);
 }
