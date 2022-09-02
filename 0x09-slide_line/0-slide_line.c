@@ -18,7 +18,7 @@ int slide_line(int *line, size_t size, int direction)
     int curr = 0;
     int pos;
     int hold = 0;
-        // Left
+        /* Left */
     if (direction == 0)
     {
         pos = 0;
@@ -56,7 +56,7 @@ int slide_line(int *line, size_t size, int direction)
                 line[pos] = hold;
             }
     }
-    // Right
+    /* Right */
     if (direction == 1)
     {
         pos = size - 1;
