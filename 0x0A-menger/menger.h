@@ -7,6 +7,6 @@
 #include <string.h>
 
 void menger(int level);
-void drawMenger(int level, int x, int y, int* mptr, int size);
+void drawMenger(int level, int x, int y, int *mptr, int size);
 
 #endif
