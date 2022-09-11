@@ -41,10 +41,7 @@ char *drawMenger(int level, char *str)
 {
 char *newstr;
 char *line;
-int i;
-int j;
-int k;
-int x;
+int i, j, k, x;
 if (level > 2)
 str = drawMenger(level - 1, str);
 newstr = (char *) malloc((strlen(str) * sizeof(char) * 9) + 1);
@@ -77,6 +74,8 @@ line = strncat(line, &str[i], 1);
 }
 }
 
+if (level > 2)
+free(str);
 free(line);
 return (newstr);
 }
