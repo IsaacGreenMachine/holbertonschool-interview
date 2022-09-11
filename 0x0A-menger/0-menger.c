@@ -14,31 +14,19 @@
  */
 void menger(int level)
 {
-int i;
-int j;
-int meng[1000][1000];
-int *mptr = &meng[0][0];
-if (level < 0)
-return;
-else if (level == 0)
+char one[] = "###\n# #\n###\n";
+char *final;
+if (level >= 0)
 {
+if (level == 0)
 printf("#\n");
-return;
-}
+else if (level == 1)
+printf("%s", one);
 else
 {
-drawMenger(level, 0, 0, mptr, pow(3, level));
-for (i = 0; i < pow(3, level); i++)
-{
-for (j = 0; j < pow(3, level); j++)
-{
-if (meng[i][j] == 1)
-printf("#");
-else
-printf(" ");
-}
-printf("\n");
-
+final = drawMenger(level, &one[0]);
+printf("%s", final);
+free(final);
 }
 }
 }
@@ -46,34 +34,50 @@ printf("\n");
 /**
  * drawMenger - draws a 2D Menger Sponge recursively
  * @level: the level of the Menger Sponge to draw
- * @x: x position to start drawing
- * @y: y position to start drawing
- * @mptr: pointer to array
- * @size: size of one dimension of menger sponge
- * Return: void
+ * @str: input menger sponge (lv - 1)
+ * Return: menger sponge string
  */
-void drawMenger(int level, int x, int y, int *mptr, int size)
+char *drawMenger(int level, char *str)
 {
+char *newstr;
+char *line;
 int i;
 int j;
-int newx;
-int newy;
-if (level == 0)
-*(mptr + (x) + (1000 * y)) = 1;
-else
-{
-for (i = 0; i < 3; i++)
-{
+int k;
+int x;
+if (level > 2)
+str = drawMenger(level - 1, str);
+newstr = (char *) malloc((strlen(str) * sizeof(char) * 9) + 1);
+line = (char *) malloc((strlen(str) * sizeof(char) * 3) + 1);
+for (i = 0; i < (int) (strlen(str) * sizeof(char) * 9); i++)
+newstr[i] = '\0';
+for (i = 0; i < (int) (strlen(str) * sizeof(char) * 3); i++)
+line[i] = '\0';
 for (j = 0; j < 3; j++)
 {
-if (!(i == 1 && j == 1))
+for (i = 0; i < (int) strlen(str); i++)
 {
-newx = (int) (pow(3, (level - 1)) * i) + x;
-newy = (int) (pow(3, (level - 1)) * j) + y;
-drawMenger(level - 1, newx, newy, mptr, size);
+if (str[i] == '\n')
+{
+newstr = strcat(newstr, line);
+if (j == 1)
+{
+for (x = 0; x < (int) strlen(line); x++)
+newstr = strcat(newstr, " ");
+}
+else
+newstr = strcat(newstr, line);
+newstr = strcat(newstr, line);
+newstr = strcat(newstr, "\n");
+for (k = 0; k < (int) (strlen(str) * sizeof(char) * 3); k++)
+line[k] = '\0';
+}
+else
+line = strncat(line, &str[i], 1);
 }
 }
-}
-}
+
+free(line);
+return (newstr);
 }
 
