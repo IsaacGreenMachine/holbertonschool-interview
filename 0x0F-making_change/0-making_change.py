@@ -16,6 +16,7 @@ def makeChange(coins, total):
     you have an infinite number of each denomination of coin in the list
     This is a (2n)log(n) solution.
     """
+    print(f"coins : {coins}\n total:{total}")
     if total <= 0:
         return 0
     count = 0
