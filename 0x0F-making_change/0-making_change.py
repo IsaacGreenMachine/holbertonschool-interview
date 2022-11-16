@@ -16,8 +16,8 @@ def makeChange(coins, total):
     you have an infinite number of each denomination of coin in the list
     This is a (2n)log(n) solution.
     """
-    # if total <= 0:
-    #     return 0
+    if total <= 0:
+        return 0
     count = 0
     # nlog(n)
     coins.sort(reverse=True)
@@ -25,5 +25,4 @@ def makeChange(coins, total):
     for coin in coins:
         count += total // coin
         total %= coin
-    # return -1 if total else count
-    return "coins : {0}\n total:{1}".format(coins, total)
+    return -1 if total else count
