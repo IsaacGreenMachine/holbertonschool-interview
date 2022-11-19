@@ -16,6 +16,8 @@ def makeChange(coins, total):
     you have an infinite number of each denomination of coin in the list
     This is a (2n)log(n) solution.
     """
+    # bad solution:
+    '''
     if total <= 0:
         return 0
     count = 0
@@ -26,3 +28,14 @@ def makeChange(coins, total):
         count += total // coin
         total %= coin
     return -1 if total else count
+    '''
+    dynamic = [total + 1] * (total + 1)
+    dynamic[0] = 0
+    for i, val in enumerate(dynamic):
+        smallest = val
+        for coin in coins:
+            if coin <= i:
+                smallest = min([dynamic[i - coin] + 1, smallest])
+        if smallest != total + 1:
+            dynamic[i] = smallest
+    return -1 if dynamic[-1] == total + 1 else dynamic[-1]
