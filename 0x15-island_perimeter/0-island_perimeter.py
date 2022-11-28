@@ -22,7 +22,14 @@ def island_perimeter(grid):
             if grid[row][column] == 1:
                 # only checking top and left sides of island since all islands
                 # have equal number of top and bottom, left and right sides
-                perimeter += [grid[row - 1][column],
-                              grid[row][column - 1],
-                              ].count(0)
+                sides = []
+                if row == 0:
+                    sides.append(0)
+                else:
+                    sides.append(grid[row - 1][column])
+                if column == 0:
+                    sides.append(0)
+                else:
+                    sides.append(grid[row][column - 1])
+                perimeter += sides.count(0)
     return perimeter * 2
