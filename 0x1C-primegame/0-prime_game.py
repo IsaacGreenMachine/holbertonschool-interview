@@ -55,10 +55,12 @@ def isWinner(x, nums):
         if n == 1:
             ben += 1
         else:
-            if n <= 0 or n > 10000:
+            if n < 0 or n > 10000:
                 return None
             primes = len(primes1(n+1))
-            if primes % 2 == 0:
+            if x*2 <= primes:
+                pass
+            elif primes % 2 == 0:
                 ben += 1
             else:
                 maria += 1
